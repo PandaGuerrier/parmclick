@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PARMCLICKER</title>
+    <link rel="shortcut icon" href="assets/img/small_cheese.png" type="image/x-icon">
     <script src="./scripts/index.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
@@ -13,7 +14,7 @@
     <div class="h-full w-full">
 
         <div class="flex flex-col h-1/2 bg-yellow-300 w-full justify-center items-center gap-4 p-4">
-            <div class="flex justify-between w-full max-w-4xl items-center">
+            <div class="flex justify-between w-full max-w-4xl items-center mt-5">
                 <div class="flex w-full gap-3 p-4">
                     <button
                             class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg
@@ -53,11 +54,12 @@ shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
                 🧀 PARM'CLICK 🧀
             </h1>
 
-            <div class="relative w-80 h-80 flex items-center justify-center">
+            <div class="relative w-100 h-100 flex items-center justify-center">
                 <img
                         src="./assets/img/cheese_1.png"
                         class="w-48 h-48 z-10 cursor-pointer hover:scale-105 active:scale-95 transition"
                         id="cheese_to_click"
+                        draggable="false"
                 />
 
                 <div id="cheese-container" class="absolute inset-0 animate-spin">
