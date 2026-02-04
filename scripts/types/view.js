@@ -118,7 +118,7 @@ export class View {
                 buyButton.className = "bg-gray-400 text-white px-4 py-2 rounded mt-5 w-full cursor-not-allowed"
             } else {
                 buyButton.disabled = false
-                buyButton.className = "bg-green-500 text-white px-4 py-2 rounded mt-5 w-full active:scale-95"
+                buyButton.className = "bg-green-500 text-white px-4 py-2 rounded mt-5 w-full hover:scale-105 active:scale-95 transition"
             }
 
             buyButton.onclick = () => {
