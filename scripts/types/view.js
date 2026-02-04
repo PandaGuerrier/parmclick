@@ -54,12 +54,17 @@ export class View {
     #renderShop() {
         const shop = document.getElementById("items-shop")
         shop.innerHTML = ""
+        const tabOption = this.game.options.tab
         items.forEach(item => {
             let itemShop = this.game.shop.items.find(i => i.id === item.id)
             if (!itemShop) {
                 this.game.shop.items.push(item)
                 itemShop = this.game.shop.items.find(i => i.id === item.id)
             }
+
+            console.log("Rendering auto: ", item.auto, " tabOption: ", tabOption)
+            if (tabOption === "auto" && !item.auto) return
+            if (tabOption === "click" && item.auto) return
 
             const itemDiv = document.createElement("div")
             itemDiv.className = "bg-blue-100 p-4 rounded-lg m-2 h-58 shadow-md flex flex-col justify-between"

@@ -1,11 +1,13 @@
 import {Shop} from "./shop.js";
 import {syncFromLocal} from "./sync.js";
 import { View } from "./view.js"
+import {Options} from "./options.js";
 
 export class Game {
     constructor() {
         this.shop = new Shop()
         this.view = new View()
+        this.options = new Options()
         this.parmesan = 0 // points game name
         this.autoParmesanPerSecond = 0
         this.parmesanByClick = 1
