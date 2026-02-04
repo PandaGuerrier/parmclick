@@ -13,24 +13,24 @@
     <div class="h-full w-full">
 
         <div class="flex flex-col h-1/2 bg-yellow-300 w-full justify-center items-center gap-4 p-4">
-            <div class="flex justify-between w-full max-w-4xl mt-15">
-                <div class="flex flex-col gap-3 p-4 w-40">
+            <div class="flex justify-between w-full max-w-4xl items-center">
+                <div class="flex w-full gap-3 p-4">
                     <button
-                            class="bg-green-500 text-white font-bold py-2 rounded-lg
+                            class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg
 shadow-md hover:bg-green-600 hover:scale-105 hover:cursor-pointer
                             active:scale-95 transition" id="save-button">
                         💾 SAVE
                     </button>
 
                     <button
-                            class="bg-blue-500 text-white font-bold py-2 rounded-lg
+                            class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg
 shadow-md hover:bg-blue-600 hover:scale-105 hover:cursor-pointer
                             active:scale-95 transition" id="load-button">
                         📂 LOAD
                     </button>
 
                     <button
-                            class="bg-red-500 text-white font-bold py-2 rounded-lg
+                            class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg
 shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
                             active:scale-95 transition" id="reset-button">
                         ☣️ RESET
@@ -39,10 +39,10 @@ shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
 
                 <div id="error-message"
                      class="flex flex-col gap-3 p-4 w-40 items-center text-center text-red-600 font-bold">
-
+                   <p>...</p>
                 </div>
 
-                <div class="flex flex-col gap-3 p-4 w-40 items-end text-left">
+                <div class="flex flex-col gap-3 p-4 w-full items-end text-left">
                     <p id="cheese-total">...</p>
                     <p id="cheese-click">...</p>
                     <p id="cheese-per-second">...</p>
