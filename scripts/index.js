@@ -1,5 +1,5 @@
 import { Game } from "./types/game.js";
-import {getStorage, resetLocalStorage} from "./types/sync.js";
+import {getStorage, resetLocalStorage, saveToLocalStorage} from "./types/sync.js";
 
 const game = new Game()
 
@@ -17,6 +17,10 @@ export const reset_button = document.getElementById("reset-button")
 
 cheese_to_click_img.addEventListener('click', (e) => {
     game.addParmesan(game.parmesanByClick)
+})
+
+save_button.addEventListener('click', (e) => {
+    saveToLocalStorage(Game)
 })
 
 load_button.addEventListener('click', (e) => {
