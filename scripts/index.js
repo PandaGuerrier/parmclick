@@ -8,6 +8,9 @@ window.addEventListener('load', () => {
 
     getStorage(game)
     game.view.render()
+
+    // Définir le tab par défaut (click)
+    autoUpgrade_button.classList.add("bg-amber-500", "text-white")
 })
 
 
@@ -23,31 +26,48 @@ export const save_button = document.getElementById("save-button")
 export const reset_button = document.getElementById("reset-button")
 export const clickUpgrade_button = document.getElementById("clicks-upgrades-button")
 export const autoUpgrade_button = document.getElementById("auto-upgrades-button")
+export const iaInput = document.getElementById("ia-input")
+export const iaSendButton = document.getElementById("ia-send")
 
-save_button.addEventListener('click', (e) => {
+iaInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        iaSendButton.click()
+    }
+})
+
+iaSendButton.addEventListener('click', () => {
+    const message = iaInput.value.trim()
+    if (message.length === 0) return
+    game.chat.send(message)
+    iaInput.value = ""
+})
+
+
+
+save_button.addEventListener('click', () => {
     saveToLocalStorage(game)
 })
 
-autoUpgrade_button.addEventListener('click', (e) => {
+autoUpgrade_button.addEventListener('click', () => {
     game.options.switchTab("auto")
-    autoUpgrade_button.classList.add("outline-none", "bg-white", "shadow-md", "text-blue-600")
-    clickUpgrade_button.classList.remove("outline-none", "bg-white", "shadow-md", "text-blue-600")
+    autoUpgrade_button.classList.add("bg-amber-500", "text-white")
+    clickUpgrade_button.classList.remove("bg-amber-500", "text-white")
     game.view.render()
 })
 
-clickUpgrade_button.addEventListener('click', (e) => {
+clickUpgrade_button.addEventListener('click', () => {
     game.options.switchTab("click")
-    clickUpgrade_button.classList.add("outline-none", "bg-white", "shadow-md", "text-blue-600")
-    autoUpgrade_button.classList.remove("outline-none", "bg-white", "shadow-md", "text-blue-600")
+    clickUpgrade_button.classList.add("bg-amber-500", "text-white")
+    autoUpgrade_button.classList.remove("bg-amber-500", "text-white")
     game.view.render()
 })
 
 
-cheese_to_click_img.addEventListener('click', (e) => {
+cheese_to_click_img.addEventListener('click', () => {
     game.addParmesan(game.parmesanByClick)
 })
 
 
-reset_button.addEventListener('click', (e) => {
+reset_button.addEventListener('click', () => {
     resetLocalStorage(game)
 })

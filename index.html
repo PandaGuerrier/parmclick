@@ -10,45 +10,42 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 <body>
-<div class="h-screen bg-yellow-100 flex justify-center items-center">
+<div class="h-screen bg-amber-50 flex justify-center items-center">
     <div class="h-full w-full">
 
-        <div class="flex flex-col h-1/2 bg-yellow-300 w-full justify-center items-center gap-4 p-4">
-            <div class="flex justify-between w-full max-w-4xl items-center mt-5">
-                <div class="flex w-full gap-3 p-4">
+        <div class="flex flex-col h-1/2 bg-amber-400 w-full justify-center items-center gap-4 p-4">
+            <div class="flex justify-between w-full max-w-5xl items-start px-4">
+                <div class="flex gap-2">
                     <button
-                            class="bg-green-500 text-white font-bold py-2 px-4 rounded-lg
-shadow-md hover:bg-green-600 hover:scale-105 hover:cursor-pointer
-                            active:scale-95 transition" id="save-button">
+                            class="bg-amber-600 text-white font-bold py-2 px-4 rounded-lg
+                            hover:bg-amber-700 hover:scale-105 hover:cursor-pointer
+                            active:scale-95 transition text-sm" id="save-button">
                         💾 SAVE
                     </button>
-
                     <button
                             class="bg-red-500 text-white font-bold py-2 px-4 rounded-lg
-shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
-                            active:scale-95 transition" id="reset-button">
-                        ☣️ RESET
+                            hover:bg-red-600 hover:scale-105 hover:cursor-pointer
+                            active:scale-95 transition text-sm" id="reset-button">
+                        ⚠️ RESET
                     </button>
                 </div>
 
-                <div id="error-message"
-                     class="flex flex-col gap-3 p-4 w-40 items-center text-center text-red-600 font-bold">
-                   <p>...</p>
+                <div id="error-message" class="text-center text-red-600 font-bold text-sm hidden">
                 </div>
 
-                <div class="flex flex-col gap-3 p-4 w-full items-end text-left">
-                    <p id="cheese-total">...</p>
-                    <p id="cheese-click">...</p>
-                    <p id="cheese-per-second">...</p>
-
+                <div class="bg-white/50 rounded-lg px-4 py-3 min-w-[180px]">
+                    <p id="cheese-total" class="text-xl font-black text-amber-900 text-right">0 🧀</p>
+                    <p id="cheese-click" class="text-xs text-amber-700 text-right mt-1">1 click = 1 🧀</p>
+                    <p id="cheese-per-second" class="text-xs text-amber-700 text-right">0 🧀/s</p>
                 </div>
             </div>
-            <h1 class="font-bold text-3xl">
+            <h1 class="font-black text-4xl text-amber-900">
                 🧀 PARM'CLICK 🧀
             </h1>
 
             <div class="relative w-100 h-100 flex items-center justify-center">
-                <img
+
+                <img    alt="Cheese to click"
                         src="./assets/img/cheese_1.png"
                         class="w-48 h-48 z-10 cursor-pointer hover:scale-105 active:scale-95 transition"
                         id="cheese_to_click"
@@ -57,35 +54,66 @@ shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
 
                 <div id="cheese-container" class="absolute inset-0 animate-spin">
                 </div>
+
+                <div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full ml-6 bg-white p-5 rounded-xl shadow-xl w-[400px] border border-amber-200" id="ia">
+                    <div class="flex items-center gap-3 mb-4 pb-3 border-b border-amber-100">
+                        <div class="w-11 h-11 bg-amber-500 rounded-full flex items-center justify-center">
+                            <span class="text-xl">🧀</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-amber-900 text-lg">Maître Fromager</h3>
+                            <p class="text-xs text-amber-500">Assistant IA</p>
+                        </div>
+                    </div>
+
+                    <div id="ia-messages" class="flex flex-col gap-3 h-72 overflow-y-auto mb-4 p-3 bg-amber-50 rounded-lg">
+                        <p class="text-sm text-amber-400 italic text-center py-4">Posez une question...</p>
+                    </div>
+
+                    <div class="flex gap-2">
+                        <input
+                            type="text"
+                            id="ia-input"
+                            placeholder="Votre message..."
+                            class="flex-1 px-4 py-3 text-sm bg-amber-50 border border-amber-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 placeholder-amber-300"
+                        />
+                        <button
+                            id="ia-send"
+                            class="bg-amber-500 text-white px-4 py-3 rounded-lg hover:bg-amber-600 active:scale-95 transition font-bold"
+                        >
+                            ➤
+                        </button>
+                    </div>
+                </div>
             </div>
 
         </div>
 
-        <div class="flex flex-col bg-amber-100 min-h-screen w-full">
+        <div class="flex flex-col bg-amber-50 min-h-screen w-full">
 
-            <header class="bg-amber-500 shadow-md w-full mb-4">
-                <h1 class="font-black text-3xl p-6 text-white text-center tracking-widest uppercase">
+            <header class="bg-amber-500 w-full mb-6">
+                <h1 class="font-black text-3xl p-6 text-white text-center tracking-wide uppercase">
                     🛒 La Fromagerie 🛒
                 </h1>
             </header>
 
             <div class="px-6 pb-10 w-full">
-                <div class="flex gap-2 mb-6 justify-center p-1 rounded-lg inline-flex w-full max-w-7xl mx-auto">
+                <div class="flex gap-2 mb-8 justify-center p-1.5 bg-amber-100 rounded-lg w-fit mx-auto">
                     <button
                             id="clicks-upgrades-button"
-                            class="px-6 py-2.5 font-semibold text-gray-700 rounded-md hover:bg-white hover:shadow-sm transition-all duration-200"
+                            class="px-6 py-2.5 font-semibold text-amber-700 rounded-md hover:bg-amber-500 transition-all duration-200"
                     >
-                        🧀 Améliorations clicks
+                        🖱️ Clics
                     </button>
                     <button
                             id="auto-upgrades-button"
-                            class="px-6 py-2.5 font-semibold text-gray-700 rounded-md hover:bg-white hover:shadow-sm transition-all duration-200"
+                            class="px-6 py-2.5 font-semibold text-amber-700 rounded-md hover:bg-amber-500 transition-all duration-200"
                     >
-                        🧀 Améliorations automatiques
+                        ⚙️ Auto
                     </button>
                 </div>
                 <div id="items-shop"
-                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto">
+                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 w-full max-w-6xl mx-auto">
                 </div>
             </div>
         </div>

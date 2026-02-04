@@ -5,11 +5,45 @@ export class View {
         this.game = null
     }
 
+    #formatNumber(num) {
+        return num.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+    }
+
     render() {
         this.#renderShop()
         this.#renderError()
         this.#renderParmesan()
         this.#renderFromoton()
+        this.#renderChat()
+    }
+
+    #renderChat() {
+        const chatContainer = document.getElementById("ia-messages")
+        chatContainer.innerHTML = ""
+        if (!this.game.chat.messages) {
+            this.game.chat.messages = []
+        }
+        if (this.game.chat.messages.length === 0) {
+            const noMessageDiv = document.createElement("div")
+            noMessageDiv.className = "text-amber-600/70 italic text-center py-4"
+            noMessageDiv.innerText = "🧀 Posez une question sur le fromage !"
+            chatContainer.appendChild(noMessageDiv)
+            return
+        }
+
+        this.game.chat.messages.forEach(message => {
+            const messageDiv = document.createElement("div")
+            if (message.role === "user") {
+                messageDiv.className = "ml-auto max-w-[80%] p-3 bg-amber-500 text-white rounded-xl rounded-br-sm text-sm"
+            } else {
+                messageDiv.className = "mr-auto max-w-[80%] p-3 bg-amber-700 text-white rounded-xl rounded-bl-sm text-sm"
+            }
+            messageDiv.innerText = message.content
+            chatContainer.appendChild(messageDiv)
+        })
+
+        // Auto-scroll vers le bas
+        chatContainer.scrollTop = chatContainer.scrollHeight
     }
 
     #renderFromoton() {
@@ -45,13 +79,13 @@ export class View {
 
     #renderParmesan() {
         const parmesanTotal = document.getElementById("cheese-total")
-        parmesanTotal.innerText = `${this.game.parmesan.toFixed(2)} 🧀`
+        parmesanTotal.innerText = `${this.#formatNumber(this.game.parmesan)} 🧀`
 
         const parmesanPerSecond = document.getElementById("cheese-per-second")
-        parmesanPerSecond.innerText = `${this.game.autoParmesanPerSecond.toFixed(2)} 🧀/s`
+        parmesanPerSecond.innerText = `${this.#formatNumber(this.game.autoParmesanPerSecond)} 🧀/s`
 
         const parmesanByClick = document.getElementById("cheese-click")
-        parmesanByClick.innerText = `1 click = ${this.game.parmesanByClick.toFixed(2)} 🧀`
+        parmesanByClick.innerText = `1 click = ${this.#formatNumber(this.game.parmesanByClick)} 🧀`
     }
 
     #renderError() {
@@ -80,45 +114,45 @@ export class View {
             if (tabOption === "click" && item.auto) return
 
             const itemDiv = document.createElement("div")
-            itemDiv.className = "bg-blue-100 p-4 rounded-lg m-2 h-58 shadow-md flex flex-col justify-between"
+            itemDiv.className = "bg-white p-5 rounded-xl m-2 h-58 shadow-md flex flex-col justify-between border border-amber-200 hover:shadow-lg hover:border-amber-300 transition-all"
 
             const name = document.createElement("h3")
             name.innerText = item.name
-            name.className = "text-2xl font-bold mb-2 underline"
+            name.className = "text-xl font-bold mb-2 text-amber-800"
             itemDiv.appendChild(name)
 
             const description = document.createElement("p")
             description.innerText = item.description
-            description.className = "text-xs mb-2"
+            description.className = "text-xs mb-2 text-amber-700/80"
             itemDiv.appendChild(description)
 
             const price = document.createElement("p")
-            price.innerText = `Prix: ${itemShop.price} 🧀`
-            price.className = ""
+            price.innerText = `💰 Prix: ${this.#formatNumber(itemShop.price)} 🧀`
+            price.className = "text-orange-700 font-semibold"
             itemDiv.appendChild(price)
 
             const quantity = document.createElement("p")
-            quantity.innerText = `Quantité: ${itemShop.quantity}`
-            quantity.className = ""
+            quantity.innerText = `📦 Quantité: ${itemShop.quantity}`
+            quantity.className = "text-amber-700"
             itemDiv.appendChild(quantity)
 
             const clicksInfo = document.createElement("p")
             if (item.auto) {
-                clicksInfo.innerText = `Génère ${itemShop.clicks} 🧀 /s`
+                clicksInfo.innerText = `⚡ Génère ${this.#formatNumber(itemShop.clicks)} 🧀 /s`
             } else {
-                clicksInfo.innerText = `Ajoute ${itemShop.clicks} 🧀 /click`
+                clicksInfo.innerText = `🖱️ Ajoute ${this.#formatNumber(itemShop.clicks)} 🧀 /click`
             }
-            clicksInfo.className = ""
+            clicksInfo.className = "text-amber-600 font-medium"
             itemDiv.appendChild(clicksInfo)
 
             const buyButton = document.createElement("button")
-            buyButton.innerText = "Acheter"
+            buyButton.innerText = "🛒 Acheter"
             if (this.game.parmesan < itemShop.price) {
                 buyButton.disabled = true
-                buyButton.className = "bg-gray-400 text-white px-4 py-2 rounded mt-5 w-full cursor-not-allowed"
+                buyButton.className = "bg-gray-300 text-gray-500 px-4 py-2.5 rounded-lg mt-4 w-full cursor-not-allowed font-semibold"
             } else {
                 buyButton.disabled = false
-                buyButton.className = "bg-green-500 text-white px-4 py-2 rounded mt-5 w-full hover:scale-105 active:scale-95 transition"
+                buyButton.className = "bg-amber-500 text-white px-4 py-2.5 rounded-lg mt-4 w-full hover:bg-amber-600 hover:scale-105 active:scale-95 transition font-semibold"
             }
 
             buyButton.onclick = () => {

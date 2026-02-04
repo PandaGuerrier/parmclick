@@ -2,12 +2,14 @@ import {Shop} from "./shop.js";
 import {syncFromLocal} from "./sync.js";
 import { View } from "./view.js"
 import {Options} from "./options.js";
+import {Chat} from "./chat.js";
 
 export class Game {
     constructor() {
         this.shop = new Shop()
         this.view = new View()
         this.options = new Options()
+        this.chat = new Chat()
         this.parmesan = 0 // points game name
         this.autoParmesanPerSecond = 0
         this.parmesanByClick = 1
@@ -21,6 +23,7 @@ export class Game {
         syncFromLocal(this)
         this.shop.game = this
         this.view.game = this
+        this.chat.game = this
         this.shop.init()
         this.view.render()
 
@@ -45,7 +48,8 @@ export class Game {
             parmesan: this.parmesan,
             autoParmesanPerSecond: this.autoParmesanPerSecond,
             parmesanByClick: this.parmesanByClick,
-            items: [...this.shop.toJson()]
+            items: [...this.shop.toJson()],
+            chat: this.chat.toJson()
         }
     }
 
@@ -65,6 +69,7 @@ export class Game {
             }
             return item
         })
+        this.chat.fromJson(json.chat)
         this.view.render()
     }
 
@@ -74,5 +79,6 @@ export class Game {
         this.parmesanByClick = 1
         this.shop.items = []
         this.error = null
+        this.chat.messages = []
     }
 }

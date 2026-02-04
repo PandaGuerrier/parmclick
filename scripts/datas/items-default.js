@@ -1,13 +1,68 @@
 export const items = [
-    // FROMAGES MANUELS (fromages / clic)
     {
-        id: 6,
+        id: 0,
+        name: "Croûte de Brie",
+        price: 15,
+        quantity: 0,
+        auto: false,
+        clicks: 1, // Gain par clic manuel
+        description: "C'est gratuit, c'est par terre."
+    },
+    {
+        id: 1,
         name: "Bûche de Chèvre Artisanale",
         price: 50,
         quantity: 0,
         auto: false,
         clicks: 20,
         description: "Un clic sec, un goût franc."
+    },
+
+    {
+        id: 2,
+        name: "Cheddar de Caractère",
+        price: 500,
+        quantity: 0,
+        auto: true,
+        clicks: 10, // Gain par seconde (auto)
+        description: "Il commence à travailler tout seul."
+    },
+    {
+        id: 3,
+        name: "Comté 24 Mois",
+        price: 2500,
+        quantity: 0,
+        auto: true,
+        clicks: 50,
+        description: "Le prestige du Jura dans votre poche."
+    },
+    {
+        id: 4,
+        name: "Roquefort Royal",
+        price: 12000,
+        quantity: 0,
+        auto: true,
+        clicks: 250,
+        description: "Une moisissure noble et lucrative."
+    },
+    {
+        id: 5,
+        name: "Meule d'Or Lunaire",
+        price: 75000,
+        quantity: 0,
+        auto: true,
+        clicks: 1000,
+        description: "La preuve que la lune est faite de fromage."
+    },
+    // FROMAGES MANUELS (fromages / clic)
+    {
+        id: 6,
+        name: "Emmental de Cantine",
+        price: 100,
+        quantity: 0,
+        auto: false,
+        clicks: 5,
+        description: "Un peu de goût, beaucoup de trous."
     },
     {
         id: 7,
@@ -103,11 +158,66 @@ export const items = [
     },
     {
         id: 17,
-        name: "Fromage de paff",
+        name: "Big Bang Fromager",
         price: 2000000, // 10 000x le premier auto (200)
         quantity: 0,
         auto: true,
         clicks: 75000,
-        description: "Le fromagio di zigouneta."
+        description: "L'univers entier se transforme en emmental."
+    },
+    // --- SUITE DES FROMAGES MANUELS ---
+    {
+        id: 18,
+        name: "Cheddar de l'Espace",
+        price: 3500000,
+        quantity: 0,
+        auto: false,
+        clicks: 120000,
+        description: "Envoyé en orbite pour un affinage sous vide."
+    },
+    {
+        id: 19,
+        name: "Roquefort Quantique",
+        price: 40000000,
+        quantity: 0,
+        auto: false,
+        clicks: 800000,
+        description: "Il est à la fois mangé et non mangé jusqu'au clic."
+    },
+    {
+        id: 20,
+        name: "L'Unique Meule d'Or",
+        price: 500000000,
+        quantity: 0,
+        auto: false,
+        clicks: 5000000,
+        description: "Le Saint-Graal lacté. Un clic pèse une tonne."
+    },
+    {
+        id: 21,
+        name: "Lune de Brie",
+        price: 15000000,
+        quantity: 0,
+        auto: true,
+        clicks: 400000,
+        description: "On a enfin trouvé de quoi est fait ce satellite."
+    },
+    {
+        id: 22,
+        name: "Empire du Camembert",
+        price: 120000000,
+        quantity: 0,
+        auto: true,
+        clicks: 2500000,
+        description: "Toutes les routes mènent à la crémerie."
+    },
+    {
+        id: 23,
+        name: "Fromage de Paff",
+        price: 1000000000,
+        quantity: 0,
+        auto: true,
+        clicks: 15000000,
+        description: "Fromagio di zigouneta"
     }
 ];
