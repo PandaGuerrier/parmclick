@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PARMCLICKER</title>
+    <script src="./scripts/index.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body>
+<div class="h-screen bg-yellow-100 flex justify-center items-center">
+    <div class="h-full w-full">
+
+        <div class="flex flex-col h-1/2 bg-yellow-300 w-full justify-center items-center gap-4 p-4">
+            <div class="flex justify-between w-full max-w-4xl mt-15">
+                <div class="flex flex-col gap-3 p-4 w-40">
+                    <button
+                            class="bg-green-500 text-white font-bold py-2 rounded-lg
+shadow-md hover:bg-green-600 hover:scale-105 hover:cursor-pointer
+                            active:scale-95 transition" id="save-button">
+                        💾 SAVE
+                    </button>
+
+                    <button
+                            class="bg-blue-500 text-white font-bold py-2 rounded-lg
+shadow-md hover:bg-blue-600 hover:scale-105 hover:cursor-pointer
+                            active:scale-95 transition" id="load-button">
+                        📂 LOAD
+                    </button>
+
+                    <button
+                            class="bg-red-500 text-white font-bold py-2 rounded-lg
+shadow-md hover:bg-red-600 hover:scale-105 hover:cursor-pointer
+                            active:scale-95 transition" id="reset-button">
+                        ☣️ RESET
+                    </button>
+                </div>
+
+                <div id="error-message"
+                     class="flex flex-col gap-3 p-4 w-40 items-center text-center text-red-600 font-bold">
+
+                </div>
+
+                <div class="flex flex-col gap-3 p-4 w-40 items-end text-left">
+                    <p id="cheese-total">...</p>
+                    <p id="cheese-click">...</p>
+                    <p id="cheese-per-second">...</p>
+
+                </div>
+            </div>
+            <h1 class="font-bold text-3xl">
+                🧀 PARM'CLICK 🧀
+            </h1>
+
+            <div class="relative w-80 h-80 flex items-center justify-center">
+                <img
+                        src="./assets/img/cheese_1.png"
+                        class="w-48 h-48 z-10 cursor-pointer hover:scale-105 active:scale-95 transition"
+                        id="cheese_to_click"
+                />
+
+                <div id="cheese-container" class="absolute inset-0 animate-spin">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="flex flex-col bg-amber-100 min-h-screen w-full">
+
+            <header class="bg-amber-500 shadow-md w-full mb-4">
+                <h1 class="font-black text-3xl p-6 text-white text-center tracking-widest uppercase">
+                    🛒 La Fromagerie 🛒
+                </h1>
+            </header>
+
+            <div class="px-6 pb-10">
+                <div id="items-shop"
+                     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl mx-auto">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
