@@ -43,7 +43,7 @@ export class Game {
             parmesan: this.parmesan,
             autoParmesanPerSecond: this.autoParmesanPerSecond,
             parmesanByClick: this.parmesanByClick,
-            items: this.shop.items.map(item => item.toJson())
+            items: this.shop.toJson()
         }
     }
 
