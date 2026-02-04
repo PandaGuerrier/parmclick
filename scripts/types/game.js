@@ -37,4 +37,13 @@ export class Game {
         if (this.parmesan < 0) this.parmesan = 0
         this.view.render()
     }
+
+    toJson() {
+        return {
+            parmesan: this.parmesan,
+            autoParmesanPerSecond: this.autoParmesanPerSecond,
+            parmesanByClick: this.parmesanByClick,
+            items: this.shop.items.map(item => item.toJson())
+        }
+    }
 }
