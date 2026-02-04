@@ -62,12 +62,17 @@ export class View {
             }
 
             const itemDiv = document.createElement("div")
-            itemDiv.className = "bg-blue-100 p-4 rounded-lg m-2 h-52 shadow-md flex flex-col justify-between"
+            itemDiv.className = "bg-blue-100 p-4 rounded-lg m-2 h-58 shadow-md flex flex-col justify-between"
 
             const name = document.createElement("h3")
             name.innerText = item.name
-            name.className = "text-xl font-bold mb-2 underline"
+            name.className = "text-2xl font-bold mb-2 underline"
             itemDiv.appendChild(name)
+
+            const description = document.createElement("p")
+            description.innerText = item.description
+            description.className = "text-xs mb-2"
+            itemDiv.appendChild(description)
 
             const price = document.createElement("p")
             price.innerText = `Prix: ${itemShop.price} 🧀`

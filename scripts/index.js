@@ -17,9 +17,6 @@ export const reset_button = document.getElementById("reset-button")
 
 
 cheese_to_click_img.addEventListener('click', (e) => {
-    const cheese_sound = new Audio("../../assets/sound/cheese_sound.mp3")
-    cheese_sound.play()
-
     game.addParmesan(game.parmesanByClick)
 })
 
