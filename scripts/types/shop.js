@@ -49,16 +49,18 @@ export class Shop {
     }
 
     toJson() {
-        return {
+        return [
             ...this.items.map((item) => {
                 return {
                     id: item.id,
+                    name: item.name,
+                    description: item.description,
                     quantity: item.quantity,
                     price: item.price,
                     clicks: item.clicks,
                     auto: item.auto
                 }
             })
-        };
+        ]
     }
 }
