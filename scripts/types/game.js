@@ -67,4 +67,12 @@ export class Game {
         })
         this.view.render()
     }
+
+    reset() {
+        this.parmesan = 0
+        this.autoParmesanPerSecond = 0
+        this.parmesanByClick = 1
+        this.shop.items = []
+        this.error = null
+    }
 }

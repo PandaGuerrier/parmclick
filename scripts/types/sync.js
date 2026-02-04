@@ -3,7 +3,15 @@ import {cheese_total} from "../index.js"
 const KEY = "parmesan"
 
 function getStorage(game) {
-    game.fromJson(JSON.parse(localStorage.getItem(KEY)))
+    const localData = localStorage.getItem(KEY)
+    if (!localData) {
+        console.log("No local storage found, initializing...")
+        localStorage.setItem(KEY, JSON.stringify(game.toJson()));
+        return
+    }
+
+    game.fromJson(JSON.parse(localData))
+    game.view.render()
 }
 
 function syncFromLocal(game) {
@@ -13,11 +21,9 @@ function syncFromLocal(game) {
     game.autoParmesanPerSecond = 0
 }
 
-function resetLocalStorage() {
-    localStorage.setItem(KEY, JSON.stringify(0));
-    localStorage.setItem(KEY2, JSON.stringify(1));
-    localStorage.setItem(KEY3, JSON.stringify(0));
-
+function resetLocalStorage(game) {
+    game.reset()
+    localStorage.setItem(KEY, JSON.stringify(game.toJson()));
     window.location.reload()
 }
 
