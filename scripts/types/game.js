@@ -37,4 +37,32 @@ export class Game {
         if (this.parmesan < 0) this.parmesan = 0
         this.view.render()
     }
+
+    toJson() {
+        return {
+            parmesan: this.parmesan,
+            autoParmesanPerSecond: this.autoParmesanPerSecond,
+            parmesanByClick: this.parmesanByClick,
+            items: this.shop.items.map(item => item.toJson())
+        }
+    }
+
+    fromJson(json) {
+        this.parmesan = json.parmesan
+        this.autoParmesanPerSecond = json.autoParmesanPerSecond
+        this.parmesanByClick = json.parmesanByClick
+        this.shop.items = json.items.map(itemJson => {
+            const item = this.shop.items.find(i => i.id === itemJson.id)
+            if (item) {
+                item.quantity = itemJson.quantity
+                item.price = itemJson.price
+                item.clicks = itemJson.clicks
+                item.auto = itemJson.auto
+                item.name = itemJson.name
+                item.description = itemJson.description
+            }
+            return item
+        })
+        this.view.render()
+    }
 }
