@@ -16,7 +16,7 @@ export class Game {
 
     init() {
         console.log("Started init game")
-        syncFromLocal()
+        syncFromLocal(this)
         this.shop.game = this
         this.view.game = this
         this.shop.init()
