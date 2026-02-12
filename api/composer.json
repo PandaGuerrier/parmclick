@@ -3,7 +3,8 @@
     "type": "project",
     "require": {
         "doctrine/orm": "^3.6",
-        "catfan/medoo": "^2.2"
+        "catfan/medoo": "^2.2",
+        "bramus/router": "^1.6"
     },
     "autoload": {
         "psr-4": {
@@ -17,6 +18,6 @@
         }
     ],
     "scripts": {
-        "dev": "php -S localhost:8000"
+        "dev": "php -S localhost:8000 src/index.php"
     }
 }

@@ -5,5 +5,10 @@ require_once __DIR__ . '/../vendor/autoload.php';
 use App\Database\Connection;
 use App\Database\Models\UserModel;
 
-echo UserModel::getAll();
-echo "Hello World!";
+$router = new \Bramus\Router\Router();
+
+$router->get('/', function() {
+    echo "Bienvenue sur l'API ParmClicker !";
+});
+
+$router->get('/users', function() { $users = UserModel::getAll(); header('Content-Type: application/json'); echo json_encode($users); }); $router->run();
