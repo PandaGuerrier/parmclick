@@ -6,12 +6,6 @@ export class Item {
         this.auto = auto;
     }
 
-    init() {
-        if (!this.auto) {
-            return; // auto incremente game
-        }
-    }
-
     toJson() {
         return {
             name: this.name,

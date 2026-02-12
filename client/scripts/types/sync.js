@@ -1,5 +1,3 @@
-import {cheese_total} from "../index.js"
-
 const KEY = "parmesan"
 
 function getStorage(game) {
