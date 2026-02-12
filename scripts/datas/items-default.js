@@ -5,7 +5,7 @@ export const items = [
         price: 15,
         quantity: 0,
         auto: false,
-        clicks: 1, // Gain par clic manuel
+        clicks: 1,
         description: "C'est gratuit, c'est par terre."
     },
     {
@@ -24,7 +24,7 @@ export const items = [
         price: 500,
         quantity: 0,
         auto: true,
-        clicks: 10, // Gain par seconde (auto)
+        clicks: 10,
         description: "Il commence à travailler tout seul."
     },
     {
