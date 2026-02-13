@@ -11,4 +11,16 @@ $router->get('/', function() {
     echo "Bienvenue sur l'API ParmClicker !";
 });
 
-$router->get('/users', function() { $users = UserModel::getAll(); header('Content-Type: application/json'); echo json_encode($users); }); $router->run();
+$router->get('/users', function() { $users = UserModel::getAll(); header('Content-Type: application/json'); echo json_encode($users); });
+
+$router->post('/register', function() {
+    $db = Connection::get();
+    register($db);
+});
+
+$router->post('/auth/login', function() {
+    login();
+});
+
+
+$router->run();
