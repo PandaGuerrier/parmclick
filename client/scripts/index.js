@@ -1,5 +1,5 @@
-import { Game } from "./types/game.js";
-import {getStorage, resetLocalStorage, saveToLocalStorage} from "./types/sync.js";
+import { Game } from "./entities/game.js";
+import {getStorage, resetLocalStorage, saveToLocalStorage} from "./entities/sync.js";
 
 const game = new Game()
 
@@ -20,7 +20,6 @@ setInterval(() => {
 }, 5000);
 
 
-export const cheese_total = document.getElementById("cheese-total")
 export const cheese_to_click_img = document.getElementById("cheese_to_click")
 export const save_button = document.getElementById("save-button")
 export const reset_button = document.getElementById("reset-button")
