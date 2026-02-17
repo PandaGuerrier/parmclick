@@ -26,17 +26,18 @@ function register($database): array
     }
 
     if (empty($errors)) {
-        $userExists = $database->has("users", [
-            "OR" => [
-                "name" => $name,
-                "email" => $email
-            ]
-        ]);
+        $usernameExists = $database->has("users", ["name" => $name]);
+        $emailExists = $database->has("users", ["email" => $email]);
 
-        if ($userExists) {
-            $errors['global'] = "This username or email is already taken.";
+        if ($usernameExists) {
+            $errors['global'] = "This username is already taken.";
             return $errors;
-        } else {
+        }
+        else if ($emailExists) {
+            $errors['global'] = "This email is already taken.";
+            return $errors;
+        }
+        else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $database->insert("users", [
@@ -46,11 +47,39 @@ function register($database): array
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
-
+            header("Location:login.php"); // todo: add path
             return ["success" => true];
         }
     }
     return $errors;
 }
 
-function login() {}
+function login($database)
+{
+    $errors = [];
+    $email = trim($_POST['email'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    $userUuid = $database->get("users", "uuid", ["email" => $email]);
+
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    session_start();
+    $_SESSION['user'] = $userUuid;
+
+    if (isset($_SESSION['use']))
+    {
+        header("Location:index.html"); // todo: add path
+    }
+
+    $user = $database->get("users", "*", ["email" => $email]);
+
+    if ($user && password_verify($password, $user['password']))
+    {
+        echo "success";
+        header("Location:http://localhost:8080/");
+    }
+
+    return $errors;
+
+}

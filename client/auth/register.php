@@ -51,8 +51,8 @@
             </div>
 
             <div class="flex flex-col gap-1">
-                <label for="passwordConfirm" class="font-bold text-[#b45309] ml-1">Confirmez le mot de passe</label>
-                <input type="password" name="passwordConfirm" id="passwordConfirm"
+                <label for="confirmPassword" class="font-bold text-[#b45309] ml-1">Confirmez le mot de passe</label>
+                <input type="password" name="confirmPassword" id="confirmPassword"
                        placeholder="••••••••"
                        class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white" required>
             </div>
