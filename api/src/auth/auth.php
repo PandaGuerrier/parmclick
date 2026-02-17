@@ -4,7 +4,6 @@
 function register($database): array
 {
     $errors = [];
-    // si c'est post alors on récup les infos
     $name = trim($_POST['username'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
@@ -26,6 +25,8 @@ function register($database): array
         $errors['confirmPassword'] = "Les mots de passe ne correspondent pas.";
     }
 
+    echo json_encode(['errors' => $errors]);
+
     if (empty($errors)) {
         $userExists = $database->has("users", [
             "OR" => [
@@ -36,6 +37,8 @@ function register($database): array
 
         if ($userExists) {
             $errors['global'] = "Ce nom d'utilisateur ou cet email est déjà utilisé.";
+
+            echo json_encode(['errors' => $errors]);
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -45,6 +48,8 @@ function register($database): array
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
+
+            echo json_encode(['success' => true]);
             header("Location: /login?success=1");
             exit;
         }
