@@ -20,8 +20,9 @@ $router->post('/register', function() {
     echo json_encode(register($db));
 });
 
-$router->post('/auth/login', function() {
-    echo "/auth/login";
+$router->post('/login', function() {
+    $db = Connection::get();
+    echo json_encode(login($db));
 });
 
 
