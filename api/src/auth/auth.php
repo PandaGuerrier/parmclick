@@ -52,7 +52,7 @@ function register($database): array
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
-            header("Location:login.php"); // todo: add path
+            header("Location:http://localhost:8080/auth/login.php");
             return ["success" => true];
         }
     }
