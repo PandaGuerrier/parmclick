@@ -49,6 +49,12 @@ $router->post('/login', function() {
     login($db);
 });
 
+$router->get('/data/get', function() {
+    // todo:
+});
 
+$router->post('/data/post', function() {
+    // todo:
+});
 
 $router->run();
