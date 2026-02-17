@@ -1,13 +1,18 @@
 <?php
-
+function console_log($data) {
+    $output = json_encode($data);
+    echo "<script>console.log($output);</script>";
+}
 
 function register($database): array
 {
+
     $errors = [];
-    $name = trim($_POST['username'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
-    $confirmPassword = $_POST['confirmPassword'] ?? '';
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
+    $name = trim($data['username'] ?? '');
+    $email = trim($data['email'] ?? '');
+    $password = $data['password'] ?? '';
+    $confirmPassword = $data['confirmPassword'] ?? '';
 
     if (empty($name)) {
         $errors['username'] = "Username is required.";

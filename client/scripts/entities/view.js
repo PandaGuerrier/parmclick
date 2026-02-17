@@ -42,7 +42,6 @@ export class View {
             chatContainer.appendChild(messageDiv)
         })
 
-        // Auto-scroll vers le bas
         chatContainer.scrollTop = chatContainer.scrollHeight
     }
 
@@ -51,14 +50,10 @@ export class View {
         const numberOfCheeses = this.game.autoParmesanPerSecond / 10;
         const radius = 150;
 
-        // Scaling logarithmique pour les grands nombres
         const displayedCheeses = Math.min(
             Math.floor(Math.log10(numberOfCheeses + 1) * 5),
             30
         );
-
-        // Ou progression par paliers
-        // const displayedCheeses = Math.min(Math.ceil(Math.sqrt(numberOfCheeses)), 25);
 
         container.innerHTML = '';
 
@@ -68,7 +63,6 @@ export class View {
             img.src = './assets/img/small_cheese.png';
             img.className = 'absolute w-12 h-12 top-1/2 left-1/2';
 
-            // Option: varier la taille selon le niveau
             const scale = 0.8 + (displayedCheeses / 30) * 0.4;
             img.style.transform = `rotate(${angle}deg) translateY(-${radius}px) scale(${scale})`;
 

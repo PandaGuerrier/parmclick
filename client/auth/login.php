@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="../assets/img/small_cheese.png" type="image/x-icon">
     <title>Parmclick - Connexion</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="h-screen bg-[#ffb900] font-sans">
 <div class="flex flex-col items-center justify-center h-full w-full p-4">

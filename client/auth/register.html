@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/img/small_cheese.png" type="image/x-icon">
     <title>Parmclick - Inscription</title>
+
+    <script src="../scripts/auth/register.js" type="module"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body class="h-screen bg-[#ffb900] font-sans">
 <div class="flex flex-col items-center justify-center min-h-screen w-full p-4">
@@ -17,7 +20,8 @@
         <p class="text-white font-bold text-lg mt-2 uppercase tracking-widest opacity-90">Rejoignez la guilde</p>
     </div>
 
-    <form action="http://localhost:8000/register" method="POST" class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
+    <form method="POST" id="register-form"
+          class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         <div class="bg-[#fe9a00] p-5 text-white text-center">
             <h3 class="font-bold text-2xl uppercase tracking-wide">Nouveau Fromager</h3>
             <p class="text-orange-100 text-sm italic">Préparez votre cave d'affinage</p>
@@ -25,36 +29,47 @@
 
         <div class="p-8 space-y-4">
             <div class="flex flex-col gap-1">
-                <?php
-                    if (isset($userNameError)) {
-                        echo "<p class='text-red-100'>$userNameError</p>";
-                    }
-                ?>
                 <label for="username" class="font-bold text-[#b45309] ml-1">Nom d'utilisateur</label>
                 <input type="text" name="username" id="username"
                        placeholder="Ex: LeRoiDuCheddar"
-                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white" required>
+                       value="aaaa"
+                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white"
+                       required>
+                <span class="text-red-500 text-xs"  id="error-username"></span>
             </div>
 
             <div class="flex flex-col gap-1">
                 <label for="email" class="font-bold text-[#b45309] ml-1">Email</label>
                 <input type="email" name="email" id="email"
                        placeholder="votre@email.fr"
-                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white" required>
+                       value="aaaa@aa.fr"
+                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white"
+                       required>
+                <span class="text-red-500 text-xs"  id="error-email"></span>
+
             </div>
 
             <div class="flex flex-col gap-1">
                 <label for="password" class="font-bold text-[#b45309] ml-1">Mot de passe</label>
                 <input type="password" name="password" id="password"
                        placeholder="••••••••"
-                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white" required>
+                       value="aaaa"
+                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white"
+                       required>
+                <span class="text-red-500 text-xs"  id="error-password"></span>
+
             </div>
 
             <div class="flex flex-col gap-1">
                 <label for="confirmPassword" class="font-bold text-[#b45309] ml-1">Confirmez le mot de passe</label>
                 <input type="password" name="confirmPassword" id="confirmPassword"
                        placeholder="••••••••"
-                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white" required>
+                       value="aaaa"
+                       class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white"
+                       required>
+
+                <span class="text-red-500 text-xs" id="error-confirmPassword"></span>
+
             </div>
 
             <div class="pt-4">
