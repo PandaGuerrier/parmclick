@@ -83,5 +83,4 @@ function login($database): array
     }
 
     return $errors;
-
 }
