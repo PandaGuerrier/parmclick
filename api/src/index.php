@@ -45,8 +45,24 @@ $router->post('/register', function() {
 
 $router->post('/login', function() {
     $db = Connection::get();
-    //echo json_encode(login($db));
-    login($db);
+    $response = login($db);
+
+    if ($response['success'] ?? false) {
+        http_response_code(201);
+    } else {
+        http_response_code(400);
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
+});
+
+$router->get('/data/get', function() {
+    // todo: get data from db
+});
+
+$router->post('/data/post', function() {
+    //todo: post user data in db
 });
 
 
