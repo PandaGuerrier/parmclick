@@ -4,7 +4,9 @@
     "require": {
         "doctrine/orm": "^3.6",
         "catfan/medoo": "^2.2",
-        "bramus/router": "^1.6"
+        "bramus/router": "^1.6",
+        "firebase/php-jwt": "^7.0",
+        "paragonie/sodium_compat": "^2.5"
     },
     "autoload": {
         "psr-4": {

@@ -1,3 +1,5 @@
+DROP TABLE `users`;
+
 CREATE TABLE `users`
 (
     `uuid`       CHAR(36)     NOT NULL,

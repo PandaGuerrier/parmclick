@@ -52,7 +52,7 @@ function register($database): array
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
-            header("Location:login.php"); // todo: add path
+            header("Location:http://localhost:8080/auth/login.php");
             return ["success" => true];
         }
     }
@@ -72,17 +72,11 @@ function login($database)
     session_start();
     $_SESSION['user'] = $userUuid;
 
-    if (isset($_SESSION['use']))
-    {
-        header("Location:index.html"); // todo: add path
-    }
-
     $user = $database->get("users", "*", ["email" => $email]);
 
     if ($user && password_verify($password, $user['password']))
     {
-        echo "success";
-        header("Location:http://localhost:8080/");
+        // todo: return token
     }
 
     return $errors;

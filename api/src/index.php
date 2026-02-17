@@ -5,6 +5,8 @@ include_once __DIR__ . '/auth/auth.php';
 
 use App\Database\Connection;
 use App\Database\Models\UserModel;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 header("Access-Control-Allow-Origin: http://127.0.0.1:8080");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
@@ -39,7 +41,8 @@ $router->post('/register', function() {
 
 $router->post('/login', function() {
     $db = Connection::get();
-    echo json_encode(login($db));
+    //echo json_encode(login($db));
+    login($db);
 });
 
 
