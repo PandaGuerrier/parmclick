@@ -7,6 +7,7 @@
     <title>Parmclick - Connexion</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../scripts/auth/login.js" type="module"></script>
 </head>
 <body class="h-screen bg-[#ffb900] font-sans">
 <div class="flex flex-col items-center justify-center h-full w-full p-4">
@@ -17,14 +18,14 @@
         </h1>
     </div>
 
-    <form action="http://localhost:8000/auth/login" method="POST"
+    <form id="login-form"
           class="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl w-full max-w-md overflow-hidden">
         <div class="bg-[#fe9a00] p-6 text-white text-center">
             <h3 class="font-bold text-2xl uppercase tracking-wide">La Fromagerie</h3>
             <p class="text-orange-100 text-sm">Connectez-vous pour affiner votre empire</p>
         </div>
 
-        <span class="text-red-500 text-xs" id="error-global"></span>
+        <span class="text-red-500 text-xl text-center" id="error-global"></span>
 
         <div class="p-8 space-y-6">
             <div class="flex flex-col gap-2">
@@ -54,7 +55,7 @@
         <div class="bg-gray-50 p-4 text-center border-t border-gray-100">
             <p class="text-gray-500 text-sm">
                 Pas encore de compte ?
-                <a href="register.php" class="text-[#fe9a00] font-bold hover:underline">Inscrivez-vous ici</a>
+                <a href="register.html" class="text-[#fe9a00] font-bold hover:underline">Inscrivez-vous ici</a>
             </p>
         </div>
     </form>

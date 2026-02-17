@@ -1,7 +1,7 @@
 import ErrorsView from "./entities/errors-view.js";
 import ApiManager from "./entities/api_manager.js";
 
-const form = document.getElementById('register-form');
+const form = document.getElementById('login-form');
 const apiManager = new ApiManager();
 
 form.addEventListener('submit', async (e) => {
@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
 
             console.error('API errors:', apiErrors);
             for (const field in apiErrors) {
-                error.errors.push({ field, message: apiErrors[field] });
+                error.errors.push({field, message: apiErrors[field]});
             }
             error.render();
         } else {
@@ -41,7 +41,7 @@ form.addEventListener('submit', async (e) => {
         localStorage.setItem('token', token);
 
         console.log('Token stored in localStorage:', token);
-    //    window.location.href = '/';
+        window.location.href = '/';
     }
 });
 

@@ -1,22 +1,16 @@
 const KEY = "parmesan"
 
-function getStorage(game) {
-    const localData = localStorage.getItem(KEY)
-    if (!localData) {
-        console.log("No local storage found, initializing...")
-        localStorage.setItem(KEY, JSON.stringify(game.toJson()));
-        return
+async function getStorage(game) {
+    const response = await game.apiManager.axiosInstance.get("/data")
+    console.log("Data fetched from server:", response.data)
+
+    if (response.data.data === null) {
+        window.location.href = "/auth/login.html"
     }
 
-    game.fromJson(JSON.parse(localData))
-    game.view.render()
-}
 
-function syncFromLocal(game) {
-    // todo localStorage to front
-    game.parmesan = 0
-    game.parmesanByClick = 1
-    game.autoParmesanPerSecond = 0
+    game.fromJson(response.data.data)
+    game.view.render()
 }
 
 function resetLocalStorage(game) {
@@ -25,9 +19,12 @@ function resetLocalStorage(game) {
     window.location.reload()
 }
 
-function saveToLocalStorage(game) {
-    localStorage.setItem(KEY, JSON.stringify(game.toJson()));
+async function saveToLocalStorage(game) {
+    const response = await game.apiManager.axiosInstance.post("/data", {
+        data: JSON.stringify(game.toJson())
+    })
+    console.log("Data saved to server:", response.data)
 }
 
 
-export {getStorage, syncFromLocal, saveToLocalStorage, resetLocalStorage}
+export {getStorage, saveToLocalStorage, resetLocalStorage}

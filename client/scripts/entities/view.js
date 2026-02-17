@@ -6,15 +6,23 @@ export class View {
     }
 
     #formatNumber(num) {
-        return num.toLocaleString('fr-FR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        return num.toLocaleString('fr-FR', {minimumFractionDigits: 2, maximumFractionDigits: 2})
     }
 
     render() {
+        this.#renderUser()
         this.#renderShop()
         this.#renderError()
         this.#renderParmesan()
         this.#renderFromoton()
         this.#renderChat()
+    }
+
+    #renderUser() {
+        const userName = document.getElementById("user-name")
+        if (this.game.user.name) {
+            userName.innerText = `👤 ${this.game.user.name}`
+        }
     }
 
     #renderChat() {

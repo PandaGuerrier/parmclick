@@ -1,11 +1,18 @@
 import {Shop} from "./shop.js";
-import {syncFromLocal} from "./sync.js";
-import { View } from "./view.js"
+import {View} from "./view.js"
 import {Options} from "./options.js";
 import {Chat} from "./chat.js";
+import ApiManager from "../auth/entities/api_manager.js";
 
 export class Game {
     constructor() {
+
+        this.user = {
+            uuid: null,
+            name: null,
+            email: null,
+            createdAt: null
+        }
         this.shop = new Shop()
         this.view = new View()
         this.options = new Options()
@@ -16,11 +23,13 @@ export class Game {
         this.items = []
         this.error = null
         this.intervalId = null
+        this.apiManager = new ApiManager({
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+        })
     }
 
     init() {
         console.log("Started init game")
-        syncFromLocal(this)
         this.shop.game = this
         this.view.game = this
         this.chat.game = this
@@ -54,10 +63,18 @@ export class Game {
     }
 
     fromJson(json) {
-        this.parmesan = json.parmesan
-        this.autoParmesanPerSecond = json.autoParmesanPerSecond
-        this.parmesanByClick = json.parmesanByClick
-        this.shop.items = json.items.map(itemJson => {
+        const gameData = JSON.parse(json.data)
+        console.log("Game data from server:", gameData)
+        this.user = {
+            uuid: json.uuid || null,
+            name: json.name || null,
+            email: json?.email || null,
+            createdAt: json?.createdAt || null
+        }
+        this.parmesan = gameData.parmesan || 0
+        this.autoParmesanPerSecond = gameData.autoParmesanPerSecond || 0
+        this.parmesanByClick = gameData.parmesanByClick || 1
+        this.shop.items = (gameData.items || []).map(itemJson => {
             const item = this.shop.items.find(i => i.id === itemJson.id)
             if (item) {
                 item.quantity = itemJson.quantity
@@ -69,7 +86,7 @@ export class Game {
             }
             return item
         })
-        this.chat.fromJson(json.chat)
+        this.chat.fromJson(gameData.chat || [])
         this.view.render()
     }
 

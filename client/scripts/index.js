@@ -1,9 +1,17 @@
 import { Game } from "./entities/game.js";
 import {getStorage, resetLocalStorage, saveToLocalStorage} from "./entities/sync.js";
 
+
+
 const game = new Game()
 
 window.addEventListener('load', () => {
+    const token = localStorage.getItem("token")
+
+    if (!token) {
+        window.location.href = "/auth/login.html"
+    }
+
     game.init()
 
     getStorage(game)

@@ -57,7 +57,7 @@ $router->post('/login', function() {
     echo json_encode($response);
 });
 
-$router->get('/data/get', function() {
+$router->get('/data', function() {
     $db = Connection::get();
     $response = getData($db);
 
@@ -71,7 +71,7 @@ $router->get('/data/get', function() {
     echo json_encode($response);
 });
 
-$router->post('/data/post', function() {
+$router->post('/data', function() {
     $db = Connection::get();
     $response = postData($db);
 
