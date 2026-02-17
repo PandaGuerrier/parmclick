@@ -13,7 +13,7 @@ form.addEventListener('submit', async (e) => {
     const username = e.target.username.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const confirmPassword = e.target.passwordConfirm.value;
+    const confirmPassword = e.target.confirmPassword.value;
 
     if (password !== confirmPassword) {
         error.errors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
