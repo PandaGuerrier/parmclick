@@ -68,7 +68,7 @@
         <div class="bg-gray-50 p-4 text-center border-t border-gray-100">
             <p class="text-gray-500 text-sm">
                 Déjà membre de la cave ?
-                <a href="connexion.html" class="text-[#fe9a00] font-bold hover:underline">Connectez-vous</a>
+                <a href="login.php" class="text-[#fe9a00] font-bold hover:underline">Connectez-vous</a>
             </p>
         </div>
     </form>
