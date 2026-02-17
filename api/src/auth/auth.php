@@ -72,11 +72,17 @@ function login($database)
     session_start();
     $_SESSION['user'] = $userUuid;
 
+    if (isset($_SESSION['use']))
+    {
+        header("Location:index.html"); // todo: add path
+    }
+
     $user = $database->get("users", "*", ["email" => $email]);
 
     if ($user && password_verify($password, $user['password']))
     {
-        // todo: return token
+        echo "success";
+        header("Location:http://localhost:8080/");
     }
 
     return $errors;
