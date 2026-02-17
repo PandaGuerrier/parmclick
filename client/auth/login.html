@@ -24,12 +24,15 @@
             <p class="text-orange-100 text-sm">Connectez-vous pour affiner votre empire</p>
         </div>
 
+        <span class="text-red-500 text-xs" id="error-global"></span>
+
         <div class="p-8 space-y-6">
             <div class="flex flex-col gap-2">
                 <label for="email" class="font-bold text-[#b45309] ml-1">Email du Fromager</label>
                 <input type="email" name="email" id="email"
                        placeholder="maitre@fromager.fr"
                        class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white">
+                <span class="text-red-500 text-xs" id="error-email"></span>
             </div>
 
             <div class="flex flex-col gap-2">
@@ -37,6 +40,7 @@
                 <input type="password" name="password" id="password"
                        placeholder="••••••••"
                        class="w-full px-4 py-3 border-2 border-orange-100 rounded-xl focus:border-[#fe9a00] focus:ring-4 focus:ring-orange-200 focus:outline-none transition-all bg-white">
+                <span class="text-red-500 text-xs" id="error-password"></span>
             </div>
 
             <div class="pt-4">

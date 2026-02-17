@@ -9,28 +9,17 @@ form.addEventListener('submit', async (e) => {
     const error = new ErrorsView([]);
 
     console.log('Form submitted');
-
-    const username = e.target.username.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const confirmPassword = e.target.confirmPassword.value;
-
-    if (password !== confirmPassword) {
-        error.errors.push({ field: 'confirmPassword', message: 'Passwords do not match' });
-        error.render();
-        return;
-    }
 
     const body = {
-        username: username,
         email: email,
         password: password,
-        confirmPassword: confirmPassword
     };
 
     console.log('Sending registration data:', body);
 
-    const response = await apiManager.axiosInstance.post('/register', body).catch(err => {
+    const response = await apiManager.axiosInstance.post('/login', body).catch(err => {
         if (err.response && err.response.data) {
             const apiErrors = err.response.data;
 
@@ -52,7 +41,7 @@ form.addEventListener('submit', async (e) => {
         localStorage.setItem('token', token);
 
         console.log('Token stored in localStorage:', token);
-        window.location.href = '/';
+    //    window.location.href = '/';
     }
 });
 
