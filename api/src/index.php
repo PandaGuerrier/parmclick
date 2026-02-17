@@ -6,6 +6,7 @@ include_once __DIR__ . '/auth/auth.php';
 use App\Database\Connection;
 use App\Database\Models\UserModel;
 
+
 $router = new \Bramus\Router\Router();
 
 $router->get('/', function() {
@@ -16,7 +17,7 @@ $router->get('/users', function() { $users = UserModel::getAll(); header('Conten
 
 $router->post('/register', function() {
     $db = Connection::get();
-    register($db);
+    echo json_encode(register($db));
 });
 
 $router->post('/auth/login', function() {
