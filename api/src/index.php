@@ -65,6 +65,12 @@ $router->post('/data/post', function() {
     //todo: post user data in db
 });
 
+$router->get('/data/get', function() {
+    // todo:
+});
 
+$router->post('/data/post', function() {
+    // todo:
+});
 
 $router->run();
