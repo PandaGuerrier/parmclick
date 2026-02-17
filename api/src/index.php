@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+include_once __DIR__ . '/auth/auth.php';
 
 use App\Database\Connection;
 use App\Database\Models\UserModel;
