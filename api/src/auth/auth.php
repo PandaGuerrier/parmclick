@@ -3,8 +3,9 @@
 function RandomString()
 {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    for ($i = 0; $i < 10; $i++) {
-        $randstring = $characters[rand(0, strlen($characters))];
+    $randstring = '';
+    for ($i = 0; $i < 64; $i++) {
+        $randstring .= $characters[rand(0, strlen($characters) - 1)];
     }
     return $randstring;
 }
