@@ -57,9 +57,9 @@ function register($database): array
                 "email" => $email,
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s"),
-                "token" => $token
+                "token" => $token,
+                "data" => "{}"
             ]);
-            header("Location:http://localhost:8080/auth/login.php");
             return ["success" => true, "token" => $token];
         }
     }
@@ -73,7 +73,6 @@ function login($database): array
     $password = $_POST['password'] ?? '';
 
     $user = $database->get("users", "*", ["email" => $email]);
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     session_start();
     $_SESSION['user'] = $user['uuid'];
