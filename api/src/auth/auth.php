@@ -10,22 +10,20 @@ function register($database): array
     $confirmPassword = $_POST['confirmPassword'] ?? '';
 
     if (empty($name)) {
-        $errors['username'] = "Le nom d'utilisateur est requis.";
+        $errors['username'] = "Username is required.";
     }
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors['email'] = "L'adresse email n'est pas valide.";
+        $errors['email'] = "Invalid email format.";
     }
 
     if (empty($password) || strlen($password) < 8) {
-        $errors['password'] = "Le mot de passe doit faire au moins 8 caractères.";
+        $errors['password'] = "Password must be at least 8 characters long.";
     }
 
     if ($password !== $confirmPassword) {
-        $errors['confirmPassword'] = "Les mots de passe ne correspondent pas.";
+        $errors['confirmPassword'] = "Password confirmation does not match.";
     }
-
-    echo json_encode(['errors' => $errors]);
 
     if (empty($errors)) {
         $userExists = $database->has("users", [
@@ -36,22 +34,20 @@ function register($database): array
         ]);
 
         if ($userExists) {
-            $errors['global'] = "Ce nom d'utilisateur ou cet email est déjà utilisé.";
-
-            echo json_encode(['errors' => $errors]);
+            $errors['global'] = "This username or email is already taken.";
+            return $errors;
         } else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
             $database->insert("users", [
+                "uuid" => uniqid(),
                 "name" => $name,
                 "email" => $email,
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s")
             ]);
 
-            echo json_encode(['success' => true]);
-            header("Location: /login?success=1");
-            exit;
+            return ["success" => true];
         }
     }
     return $errors;
