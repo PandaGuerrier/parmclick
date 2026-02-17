@@ -19,7 +19,7 @@ $router->post('/register', function() {
 });
 
 $router->post('/auth/login', function() {
-    login();
+    echo "/auth/login";
 });
 
 
