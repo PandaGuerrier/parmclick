@@ -74,13 +74,19 @@ function login($database): array
 
     $user = $database->get("users", "*", ["email" => $email]);
 
-    session_start();
-    $_SESSION['user'] = $user['uuid'];
-
-    if ($user && password_verify($password, $user['password']))
-    {
+    if ($user && password_verify($password, $user['password'])) {
         return ["success" => true, "token" => $user['token']];
+    } else {
+        $errors['global'] = "Invalid email or password.";
     }
 
     return $errors;
+}
+
+function getData($database) {
+
+}
+
+function postData($database) {
+
 }
