@@ -69,8 +69,9 @@ function register($database): array
 function login($database): array
 {
     $errors = [];
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
+    $email = trim($data['email'] ?? '');
+    $password = $data['password'] ?? '';
 
     $user = $database->get("users", "*", ["email" => $email]);
 
@@ -83,8 +84,25 @@ function login($database): array
     return $errors;
 }
 
-function getData($database) {
+function getData($database): array
+{
+    $errors = [];
+    $header = getallheaders();
+    $authHeader = $header['Authorization'];
 
+    if (!$authHeader) {
+        $errors['global'] = "Invalid authorization.";
+    }
+
+    $data = $database->get("users", "*", ["token" => $authHeader]);
+
+    if ($data && password_verify($authHeader, $data['token'])) {
+        return ["success" => true, "data" => $data];
+    } else {
+        $errors['global'] = "Invalid token.";
+    }
+
+    return $errors;
 }
 
 function postData($database) {
