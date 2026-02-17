@@ -58,10 +58,30 @@ $router->post('/login', function() {
 });
 
 $router->get('/data/get', function() {
-    // todo: get data from db
+    $db = Connection::get();
+    $response = getData($db);
+
+    if ($response['success'] ?? false) {
+        http_response_code(201);
+    } else {
+        http_response_code(400);
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
 });
 
 $router->post('/data/post', function() {
-    //todo: post user data in db
+    $db = Connection::get();
+    $response = postData($db);
+
+    if ($response['success'] ?? false) {
+        http_response_code(201);
+    } else {
+        http_response_code(400);
+    }
+
+    header('Content-Type: application/json');
+    echo json_encode($response);
 });
 $router->run();

@@ -88,15 +88,23 @@ function getData($database): array
 {
     $errors = [];
     $header = getallheaders();
-    $authHeader = $header['Authorization'];
+    $authHeader = $header['Authorization'] ?? null;
 
     if (!$authHeader) {
-        $errors['global'] = "Invalid authorization.";
+        $errors['global'] = "Invalid header.";
     }
 
-    $data = $database->get("users", "*", ["token" => $authHeader]);
+    $token = str_replace('Bearer ', '', $authHeader);
 
-    if ($data && password_verify($authHeader, $data['token'])) {
+    $data = $database->get("users", [
+        "uuid",
+        "email",
+        "name",
+        "created_at",
+        "data"
+    ], ["token" => $token]);
+
+    if ($data) {
         return ["success" => true, "data" => $data];
     } else {
         $errors['global'] = "Invalid token.";
@@ -105,6 +113,26 @@ function getData($database): array
     return $errors;
 }
 
-function postData($database) {
+function postData($database): array {
+    $errors = [];
+    $header = getallheaders();
+    $authHeader = $header['Authorization'] ?? null;
+    $data = json_decode(file_get_contents('php://input'), true) ?? [];
+    $newData = $data['data'];
 
+    if (!$authHeader) {
+        $errors['global'] = "Invalid header.";
+    }
+
+    $token = str_replace('Bearer ', '', $authHeader);
+
+    $payload = $database->update("users", ["data" => $newData], ["token" => $token]);
+
+    if ($payload) {
+        return ["success" => true, "data" => $payload];
+    } else {
+        $errors['global'] = "Invalid token.";
+    }
+
+    return $errors;
 }
