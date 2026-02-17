@@ -1,12 +1,16 @@
 <?php
-function console_log($data) {
-    $output = json_encode($data);
-    echo "<script>console.log($output);</script>";
+
+function RandomString()
+{
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    for ($i = 0; $i < 10; $i++) {
+        $randstring = $characters[rand(0, strlen($characters))];
+    }
+    return $randstring;
 }
 
 function register($database): array
 {
-
     $errors = [];
     $data = json_decode(file_get_contents('php://input'), true) ?? [];
     $name = trim($data['username'] ?? '');
@@ -44,45 +48,38 @@ function register($database): array
         }
         else {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $token = RandomString();
 
             $database->insert("users", [
                 "uuid" => uniqid(),
                 "name" => $name,
                 "email" => $email,
                 "password" => $hashedPassword,
-                "created_at" => date("Y-m-d H:i:s")
+                "created_at" => date("Y-m-d H:i:s"),
+                "token" => $token
             ]);
             header("Location:http://localhost:8080/auth/login.php");
-            return ["success" => true];
+            return ["success" => true, "token" => $token];
         }
     }
     return $errors;
 }
 
-function login($database)
+function login($database): array
 {
     $errors = [];
     $email = trim($_POST['email'] ?? '');
     $password = $_POST['password'] ?? '';
 
-    $userUuid = $database->get("users", "uuid", ["email" => $email]);
-
+    $user = $database->get("users", "*", ["email" => $email]);
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     session_start();
-    $_SESSION['user'] = $userUuid;
-
-    if (isset($_SESSION['use']))
-    {
-        header("Location:index.html"); // todo: add path
-    }
-
-    $user = $database->get("users", "*", ["email" => $email]);
+    $_SESSION['user'] = $user['uuid'];
 
     if ($user && password_verify($password, $user['password']))
     {
-        echo "success";
-        header("Location:http://localhost:8080/");
+        return ["success" => true, "token" => $user['token']];
     }
 
     return $errors;
