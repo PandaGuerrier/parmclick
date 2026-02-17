@@ -57,7 +57,8 @@ function register($database): array
                 "email" => $email,
                 "password" => $hashedPassword,
                 "created_at" => date("Y-m-d H:i:s"),
-                "token" => $token
+                "token" => $token,
+                "data" => "{}"
             ]);
             header("Location:http://localhost:8080/auth/login.php");
             return ["success" => true, "token" => $token];

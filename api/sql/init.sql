@@ -8,6 +8,7 @@ CREATE TABLE `users`
     `password`   VARCHAR(255) NOT NULL,
     `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `token`      VARCHAR(255),
+    `data`       JSON NOT NULL DEFAULT (JSON_OBJECT()),
     PRIMARY KEY (`uuid`),
     UNIQUE KEY `unique_email` (`email`),
     UNIQUE KEY `unique_token` (`token`)
